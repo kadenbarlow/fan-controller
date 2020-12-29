@@ -27,7 +27,8 @@ void loop() {
   }
 
   temperatureF = (float)temperatureC * 9.0/5.0 + 32.0; // °F = °C x 9/5 + 32.
-  Serial.print("{ \"temperature\": "); Serial.print(temperatureF);
+  Serial.print("{ \"type\": \"status\"");
+  Serial.print(", \"temperature\": "); Serial.print(temperatureF);
   Serial.print(", \"humidity\": "); Serial.print((float)humidity);
   Serial.print(" }\n");
 

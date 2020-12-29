@@ -1,16 +1,19 @@
 #! /usr/bin/env ruby
 
-require 'json'
 require 'sinatra'
-require 'data_mapper'
 
-DataMapper.setup :default, "sqlite3://#{Dir.pwd}/controller.db"
+require './database.rb'
+
+set :environment, :production
+set :port, 80
 
 get '/sensor/:type' do
+  content_type :json
+  { status: DB[:sensors].where(type: params[:type]).get(:value) }.to_json
 end
 
-get '/light'
-post '/light'
+# get '/light'
+# post '/light'
 
-get '/fan'
-post '/fan'
+# get '/fan'
+# post '/fan'
