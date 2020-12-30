@@ -56,13 +56,22 @@ post '/fan/:name' do
     # We know we can toggle because the new state is different from the current state
     serial_port.write('f')
     DB[:fans].where(name: params[:name]).update(state: body['state'])
-  elsif SPEEDS.include?(body['state']) && (current_speed != body['state'] || current_state == 'off')
+  end
+
+  if SPEEDS.include?(body['state']) && current_state == 'off'
+    DB[:fans].where(name: params[:name]).update(state: 'on')
+    serial_port.write('f')
+  end
+
+  if SPEEDS.include?(body['state']) && current_speed != body['state']
     current_index = SPEEDS.index(current_speed)
     new_index = SPEEDS.index(body['state'])
     # There are two commands for setting the speed of the fan, increase the speed or decrease the speed
     # we only want to send the command if the new speed is different from the previous
     command = new_index > current_index ? 'S' : 's'
-    serial_port.write(command)
+
+    # If going from low to high need to send the command multiple times
+    (new_index - current_index).times { serial_port.write(command) }
     DB[:fans].where(name: params[:name]).update(speed: body['state'])
   end
 
