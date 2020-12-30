@@ -37,7 +37,11 @@ end
 
 get '/fan/:name' do
   content_type :json
-  { state: DB[:fans].where(name: params[:name]).get(:speed) }.to_json
+  current_state = DB[:fans].where(name: params[:name]).get(:state)
+  current_speed = DB[:fans].where(name: params[:name]).get(:speed)
+  state = current_state == 'on' ? current_speed : current_state
+
+  { state: state }.to_json
 end
 
 post '/fan/:name' do
