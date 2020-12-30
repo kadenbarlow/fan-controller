@@ -9,7 +9,7 @@ def update_sensor(type, value)
   DB[:sensors].where(type: type).update(state: value)
 end
 
-def update_state data
+def update_state(data)
   data.each do |key, value|
     update_sensor(key, value) if %w[temperature humidity].include?(key)
   end
@@ -19,5 +19,5 @@ serial_port = SerialPort.new('/dev/ttyACM0', 9600, 8, 1, SerialPort::NONE)
 while (line = serial_port.readline("\n").chomp)
   data = JSON.parse(line) rescue next
 
-  update_state(data) if data['type'] != 'update'
+  update_state(data) if data['type'] == 'update'
 end
