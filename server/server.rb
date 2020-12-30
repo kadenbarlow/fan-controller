@@ -71,7 +71,7 @@ post '/fan/:name' do
     command = new_index > current_index ? 'S' : 's'
 
     # If going from low to high need to send the command multiple times
-    (new_index - current_index).times { serial_port.write(command) }
+    (new_index - current_index).abs.times { serial_port.write(command) }
     DB[:fans].where(name: params[:name]).update(speed: body['state'])
   end
 
