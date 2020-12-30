@@ -1,5 +1,6 @@
 #! /usr/bin/env ruby
 
+require 'serialport'
 require 'sinatra'
 
 require './database.rb'
