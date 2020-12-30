@@ -3,7 +3,6 @@
 require 'sinatra'
 
 require './database.rb'
-require './light.rb'
 
 set :environment, :production
 set :port, 80

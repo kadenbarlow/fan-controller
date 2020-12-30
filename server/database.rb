@@ -2,7 +2,7 @@ require 'sequel'
 
 DB = Sequel.connect('sqlite://controller.db')
 
-unless DB.run('SELECT name FROM sqlite_master WHERE type=\'table\' AND name=\'sensors\';')
+unless DB.tables.include?(:sensors)
   DB.create_table :sensors do
     primary_key :id
     String :type, null: false
@@ -11,7 +11,7 @@ unless DB.run('SELECT name FROM sqlite_master WHERE type=\'table\' AND name=\'se
   %w[temperature humidity].each { |type| DB[:sensors].insert(type: type) }
 end
 
-unless DB.run('SELECT name FROM sqlite_master WHERE type=\'table\' AND name=\'lights\';')
+unless DB.tables.include?(:lights)
   DB.create_table :lights do
     primary_key :id
     String :name, null: false
@@ -20,7 +20,7 @@ unless DB.run('SELECT name FROM sqlite_master WHERE type=\'table\' AND name=\'li
   DB[:lights].insert(name: 'bedroom_light', state: 'off')
 end
 
-unless DB.run('SELECT name FROM sqlite_master WHERE type=\'table\' AND name=\'fans\';')
+unless DB.tables.include?(:fans)
   DB.create_table :fans do
     primary_key :id
     String :name, null: false
