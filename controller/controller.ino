@@ -63,16 +63,16 @@ void serverCommands() {
     incomingByte = Serial.read();
     switch (incomingByte) {
     case 'l': // toggle light
-      transmit(toggleLight);
+      transmit(&toggleLight[0]);
       break;
     case 'f': // toggle fan
-      transmit(toggleFan);
+      transmit(&toggleFan[0]);
       break;
     case 'S': // increase fan speed
-      transmit(increaseSpeed);
+      transmit(&increaseSpeed[0]);
       break;
     case 's': // decrease fan speed
-      transmit(decreaseSpeed);
+      transmit(&decreaseSpeed[0]);
       break;
     }
   }
