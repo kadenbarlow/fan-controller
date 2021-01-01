@@ -15,7 +15,8 @@ def update_state(data)
   end
 end
 
-serial_port = SerialPort.new('/dev/ttyACM0', 9600, 8, 1, SerialPort::NONE)
+file = Dir['/dev/ttyACM*'].first
+serial_port = SerialPort.new(file, 9600, 8, 1, SerialPort::NONE)
 while (line = serial_port.readline("\n").chomp)
   data = JSON.parse(line) rescue next
 

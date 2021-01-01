@@ -9,7 +9,8 @@ set :environment, :production
 set :port, 80
 
 SPEEDS = %w[low medium high].freeze
-serial_port = SerialPort.new('/dev/ttyACM0', 9600, 8, 1, SerialPort::NONE)
+file = Dir['/dev/ttyACM*'].first
+serial_port = SerialPort.new(file, 9600, 8, 1, SerialPort::NONE)
 
 get '/sensor/:type' do
   content_type :json
