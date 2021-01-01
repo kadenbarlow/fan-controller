@@ -1,0 +1,14 @@
+[Unit]
+Description=Serial Monitor
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/fan-controller/server
+ExecStart=/bin/bash -lc 'sudo ruby serial-monitor.rb'
+Restart=always
+SyslogIdentifier=serial-monitor
+
+[Install]
+WantedBy=multi-user.target

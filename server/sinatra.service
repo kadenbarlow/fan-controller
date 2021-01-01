@@ -1,0 +1,14 @@
+[Unit]
+Description=Sinatra HTTP Server
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/fan-controller/server
+ExecStart=/bin/bash -lc 'sudo ruby server.rb'
+Restart=always
+SyslogIdentifier=sinatra
+
+[Install]
+WantedBy=multi-user.target
