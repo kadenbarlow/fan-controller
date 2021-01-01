@@ -50,12 +50,12 @@ void checkSensors() {
 
 void transmit(unsigned int* command) {
   int state = 0;
-  for (int x = 0; x < sizeof(command)/sizeof(command[0]); ++x) {
+  for (int x = 0; x < 468; ++x) {
     state = !state;
-    digitalWrite(12, state);
+    digitalWrite(pinRFTransmitter, state);
     delayMicroseconds(command[x]);
   }
-  digitalWrite(12, LOW);
+  digitalWrite(pinRFTransmitter, LOW);
 }
 
 void serverCommands() {
