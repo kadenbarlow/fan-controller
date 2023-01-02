@@ -1,7 +1,7 @@
 # Hunter Ceiling Fan Arduino Controller
 
 Code for Arduino Mega 2560 and Raspberry Pi Zero W to automate a Hunter Ceiling Fan. For more background and explanation 
-see [this blog post](https://www.kadenbarlow.dev/arduino-smart-fan).
+see [this blog post](https://www.kadenbarlow.dev/blog/2021-01-18-arduino-smart-fan).
 
 ## controller/controller.ino 
 The controller code has two purposes. Transmit RF signals to the fan in place of a remote controller and sample temperature
